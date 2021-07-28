@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-
+import { CCTransaction } from '../models/CCTransaction.model';
 
 
 @Injectable({
@@ -11,8 +11,9 @@ import { environment } from 'src/environments/environment';
 export class BluesnapService {
   baseUrl:string = "http://localhost:4200/";
   auth : string = environment.bsEncodedAuth;
-  BSUrl : string = environment.bsGettokenPOSTUrl;
-
+  BSGetTokenUrl : string = environment.bsGettokenPOSTUrl;
+  BSCCTransaction : string = environment.bsCCTransaction;
+  
 
   constructor(private http: HttpClient) { }
 
@@ -23,13 +24,25 @@ export class BluesnapService {
 
   generateToken(): Observable<any>{
       const headers = {
-              'content-type': 'application/json',
+      'content-type': 'application/json',
       'Accept' : 'application/json',
       "Authorization" : `Basic ${environment.bsEncodedAuth}`
       }
      const body ={};
-     return  this.http.post<any>(this.BSUrl,body,{observe: "response", headers: headers})
+     return  this.http.post<any>(this.BSGetTokenUrl,body,{observe: "response", headers: headers})
   }
+
+
+  submitData(data : CCTransaction ): Observable<any>{
+    const headers = {
+    'content-type': 'application/json',
+    'Accept' : 'application/json',
+    "Authorization" : `Basic ${environment.bsEncodedAuth}`
+    }
+   const body = data
+   return  this.http.post<CCTransaction>(this.BSCCTransaction,body,{observe: "response", headers: headers})
+}
+
 
   // sendMsg(msg: MsgModel): Observable<any>{
   //   let url = this.baseUrl + 'msg'

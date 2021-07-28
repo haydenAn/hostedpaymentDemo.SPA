@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { BlueSnapGateway, BlueSnapConfig } from 'bluesnap';
 import { bsObj } from './bsObj';
 import {BluesnapService} from '../services/bluesnap.service'
-import { Observable, throwError} from 'rxjs';
-import {map} from 'rxjs/operators'
+import {CCTransaction, CardHolderInfo} from "../models/CCTransaction.model"
 
 // const bluesnapConfig = new BlueSnapConfig('Sandbox', environment.bsSandBoxUserName, environment.bsSandBoxUserName, '3.0');
 // const gateway = new BlueSnapGateway(bluesnapConfig);
@@ -44,16 +43,28 @@ export class PaymentfieldComponent implements OnInit {
     //   console.log(err)
     // })
   }
+  submitData(){
+    //amount, softDescriptor ,cardHolderInfo, currency, cardTransactionType,pfToken
+	let amount = 1, 
+	softDescriptor = "test description",
+	cardHolderInfo = new CardHolderInfo("Hyeryeon","An","75028"),
+	currency= "USD",
+	cardTransactionType="AUTH_CAPTURE",
+	pfToken = bsObj.token;
 
+	let paymentData = new CCTransaction(amount, softDescriptor,cardHolderInfo,currency,cardTransactionType,pfToken)
+	this.bsService.submitData(paymentData).subscribe(res=>{
+		console.log(res)
+	})
+  }
 
   setUpBS() {
 		console.log("got triggered ")
 		bluesnap.hostedPaymentFieldsCreate(bsObj);
-	}
-
+ }
 
   do_when_clicking_submit_button() {
-		bluesnap.hostedPaymentFieldsSubmitData(function (callback : any) {
+		bluesnap.hostedPaymentFieldsSubmitData((callback : any) => {
 			if (null != callback.cardData) {
 				var fraudSessionId = callback.transactionFraudInfo.fraudSessionId;
 
@@ -67,7 +78,10 @@ export class PaymentfieldComponent implements OnInit {
 					', ccBin: ' + callback.cardData.ccBin +
 					' and fraudSessionId: ' + fraudSessionId +
 					', after that I can call final submit');
-				// submit the form
+                
+				// submit the forms
+				this.submitData();
+
 			} else {
 				var errorArray = callback.error;
 				for (var i in errorArray) {

@@ -1,7 +1,7 @@
-var token = "eyJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7ImNvbW1vbkp3dFBheWxvYWQiOnsiaWQiOiIxMjY3Nzc1MDMxMDIzMzA1NTI3MTMzMTciLCJkYXRlQ3JlYXRlZCI6MTYyNzQzNjEwNDk1NX0sIm1lcmNoYW50SWQiOjkxMzIwOSwic2VudHJ5Ijp7Im1lcmNoYW50IjpmYWxzZSwiYXBwcyI6W119fX0.JkIG37v6C2jslSluux7tQV5gRadw3_dTGaGGOCTAqlE._"
+var _token = "eyJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7ImNvbW1vbkp3dFBheWxvYWQiOnsiaWQiOiIxMjY3NjUzOTEzNDM4MjQzODI4NTUwODUiLCJkYXRlQ3JlYXRlZCI6MTYyNzQzODkxOTY5M30sIm1lcmNoYW50SWQiOjkxMzIwOSwic2VudHJ5Ijp7Im1lcmNoYW50IjpmYWxzZSwiYXBwcyI6W119fX0.Be_jtBEweGfTkvoD-E8vh2vGAzZNoTxih685g7T5i3c._"
 
 export const bsObj = {
-  token: "@_token"
+  token: _token
   , onFieldEventHandler: {
   /*OPTIONAL*/ setupComplete: function () {
       console.warn("setupComplete");

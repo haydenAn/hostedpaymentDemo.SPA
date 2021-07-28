@@ -7,6 +7,7 @@ export const environment = {
   bsSandBoxUserName : "API_16165996257321733025403",
   bsSandBoxPassword : "KS!G4Po0e?|:aidw3/I@",
   bsGettokenPOSTUrl : "https://sandbox.bluesnap.com/services/2/payment-fields-tokens",
+  bsCCTransaction : "https://sandbox.bluesnap.com/services/2/transactions",
   bsEncodedAuth : "QVBJXzE2MTY1OTk2MjU3MzIxNzMzMDI1NDAzOktTIUc0UG8wZT98OmFpZHczL0lA"
 };
 
